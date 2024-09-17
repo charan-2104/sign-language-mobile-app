@@ -8,22 +8,22 @@ const FormField = ({ title, placeholder, value, handleChangeText, otherStyles, .
 
     return (
         <View style={{ marginBottom: 16, ...otherStyles }}>
-            <Text style={{ fontSize: 16, color: '#ccc', marginBottom: 8 }}>{title}</Text>
+            <Text style={{ fontSize: 16, color: '#374151', marginBottom: 8 }}>{title}</Text>
             <View style={{
                 flexDirection: 'row',
                 alignItems: 'center',
                 borderColor: '#333',
                 borderWidth: 2,
-                backgroundColor: '#222',
+                backgroundColor: '#f5f5f4',
                 borderRadius: 16,
                 paddingHorizontal: 16,
                 height: 64
             }}>
                 <TextInput
-                    style={{ flex: 1, color: '#fff', fontSize: 16 }}
+                    style={{ flex: 1, color: 'black', fontSize: 16 }}
                     value={value}
                     placeholder={placeholder}
-                    placeholderTextColor="#7b7b8b"
+                    placeholderTextColor="#374151"
                     onChangeText={handleChangeText}
                     secureTextEntry={title === 'Password' && !showPassword}
                     {...props}

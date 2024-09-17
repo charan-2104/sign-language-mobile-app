@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, PanResponder, Dimensions, StyleSheet, Button } from 'react-native';
+import { Dimensions, Image, PanResponder, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
+import icon from "../constants/icons";
 
 const DrawingPad = () => {
   const [paths, setPaths] = useState([]);
@@ -28,13 +29,9 @@ const DrawingPad = () => {
 
   const erasePath = (x, y) => {
     const updatedPaths = paths.map((path) => {
-      // Create a new path that excludes the erased segments
-      // Simplified example, you might need to use more advanced geometry to precisely erase
       if (path.color === 'black') {
-        // Logic to determine if the path intersects with the eraser
-        // This example just clears the path if it's close to the eraser position
         if (isCloseToEraser(x, y, path.d)) {
-          return { ...path, color: 'white' }; // Set color to white to simulate erasing
+          return { ...path, color: 'white' };
         }
       }
       return path;
@@ -43,8 +40,6 @@ const DrawingPad = () => {
   };
 
   const isCloseToEraser = (x, y, pathData) => {
-    // This function determines if the given point (x, y) is close enough to the path to be erased
-    // Implement your logic here based on pathData and eraser size
     return true; // Simplified for demonstration
   };
 
@@ -54,11 +49,8 @@ const DrawingPad = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.buttonContainer}>
-        <Button title={isErasing ? 'Draw' : 'Erase'} onPress={toggleEraseMode} />
-      </View>
       <View style={styles.canvasContainer} {...panResponder.panHandlers}>
-        <Svg height={height / 2} width={width} style={styles.canvas}>
+        <Svg height="100%" width="100%" style={styles.canvas}>
           {paths.map((path, index) => (
             <Path
               key={index}
@@ -69,6 +61,11 @@ const DrawingPad = () => {
             />
           ))}
         </Svg>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity onPress={toggleEraseMode}>
+            <Image source={isErasing ? icon.pen : icon.eraser} style={{ width: 30, height: 30 }} />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -77,23 +74,31 @@ const DrawingPad = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#d6d3d1',  // Background color for the main container
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  buttonContainer: {
-    marginBottom: 10,
   },
   canvasContainer: {
     flex: 1,
-    width: '100%',
+    width: '90%',  // Leave 5% space on both left and right
+    height: '90%', // Leave 5% space on top and bottom
+    backgroundColor: '#E0F2F1', // stone-100 background color
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 2,
+    borderColor: 'gray',
+    borderRadius: 10,
+    position: 'relative', // Required for absolute positioning of the button
   },
   canvas: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+  },
+  buttonContainer: {
     position: 'absolute',
-    top: 0,
-    left: 0,
+    top: 10,
+    right: 10,
+    zIndex: 1, // Ensure button is above the canvas
   },
 });
 

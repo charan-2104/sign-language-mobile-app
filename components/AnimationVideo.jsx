@@ -9,7 +9,7 @@ const AnimationVideo = ({animateSource}) => {
       resizeMode='contain'
       shouldPlay={true}
       isLooping={true}
-      style={{ width: '100%', height: 300 }}
+      style={{ width: '100%', height: 190 }}
     />
 
   )

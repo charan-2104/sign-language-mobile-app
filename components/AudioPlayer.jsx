@@ -31,7 +31,7 @@ const AudioPlayer = ({audioSource}) => {
       >
         <Image 
           source={image.speaker}
-          style={{width:40, height:40}}
+          style={{width:60, height:60}}
         />
       </TouchableOpacity>
     </View>

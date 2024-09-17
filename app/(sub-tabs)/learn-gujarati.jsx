@@ -6,7 +6,7 @@ import { router } from 'expo-router'
 
 const LearnGujarati = () => {
   return (
-    <SafeAreaView className="bg-primary flex-1">
+    <SafeAreaView className="bg-stone-300 flex-1">
       <View className="w-full flex-1 px-4 py-4">
       <View className="flex-grow justify-center">
           <View className="space-y-4">

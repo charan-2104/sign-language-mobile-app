@@ -1,37 +1,44 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import AnimationVideo from '../../components/AnimationVideo';
 import DrawingPad from '../../components/DrawingPad';
 import ImageAndAudio from '../../components/ImageAndAudio';
-import { animation, audio, images } from '../../constants';
 import PrevAndNext from '../../components/PrevAndNext';
+import { animation, audio, images } from '../../constants';
 
 const GujaratiNumbers = () => {
+
+  const navigation = useNavigation();
+
+  const handleBackPress = () => {
+    navigation.goBack('/learn-gujarati')
+  }
+
   return (
-    <SafeAreaView className="flex-1 bg-[#161622]">
-      <View className="flex-1 justify-center items-center">
+    <SafeAreaView className="flex-1 bg-stone-300">
+     <View className="relative flex-[0.36] justify-center items-center pt-16 ">
+      <TouchableOpacity 
+        onPress={handleBackPress} 
+        className="bg-stone-600 absolute top-12 left-4 py-1 px-4 rounded-3xl"
+      >
+        <Text className="text-white font-psemibold text-base">Back</Text>
+      </TouchableOpacity>
         <AnimationVideo 
           animateSource={animation.two}
         />
       </View>
-      <ImageAndAudio 
-        imageSource={images.two}
-        audioSource={audio.two}
-      />
-      {/* <View className="flex-1 flex-row items-center px-12">
-        <View className="flex-1 items-center ml-10">
-          <LetterImageDisplay 
-            imageSource={images.two}  
-          />
-        </View>
-        <AudioPlayer 
-          audioSource={audio.two}
-        />
-      </View> */}
-      <View className="flex-1">
-        <DrawingPad />
+      <View className="flex-[0.26] flex-row justify-between items-center px-8 ">
+        <ImageAndAudio 
+          imageSource={images.two} 
+          audioSource={audio.two} />
       </View>
-      <PrevAndNext />
+
+      <View className="flex-[0.40] pt-10 ">
+        <DrawingPad />
+        <PrevAndNext />
+      </View>
+
     </SafeAreaView>
   );
 };
